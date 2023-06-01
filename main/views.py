@@ -1,3 +1,5 @@
-from django.shortcuts import render
+from django.views.generic import base
 
-# Create your views here.
+
+class Main(base.TemplateView):
+    template_name = "main/main.html"
