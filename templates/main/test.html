@@ -1,0 +1,26 @@
+{% extends 'main/base.html' %}
+
+{% block css %}
+<link rel="stylesheet" href="css/test.css">
+{% endblock %}
+
+{% block title %}
+Тесты
+{% endblock %}
+
+{% block header_link %}
+<a href="login" class="header_link">Вход в аккаунт</a>
+<a href="register" class="header_link">Регистрация</a>
+{% endblock %}
+
+{% block main %}
+<main>
+  {% if not request.user.is_authenticated %}
+  <h1 class="info">Для просмотра Ваших данных о тестах необходимо авторизоваться</h1>
+  {% else %}
+  <div class="tests">
+
+  </div>
+  {%endif%}
+</main>
+{% endblock %}

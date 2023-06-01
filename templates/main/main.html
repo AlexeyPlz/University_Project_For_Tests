@@ -1,0 +1,24 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Добро пожаловать!
+{% endblock %}
+
+{% block header_link %}
+<a href="login" class="header_link">Вход в аккаунт</a>
+<a href="register" class="header_link">Регистрация</a>
+{% endblock %}
+
+{% block main %}
+<main>
+  <h1 class="main_info">Тест уровня</h1>
+  <div class="main_links">
+    <a class="main_link">Лексика</a>
+    <a class="main_link">Грамматика</a>
+    <a class="main_link">Фразеология</a>
+    <a class="main_link">Глаголы</a>
+    <a class="main_link">Тренажер спряжения</a>
+    <a class="main_link">Тест уровня</a>
+  </div>
+</main>
+{% endblock %}
