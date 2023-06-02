@@ -71,7 +71,6 @@ class Result(models.Model):
     date = models.DateTimeField(null=False, blank=False, auto_now_add=True, verbose_name='Дата')
     test = models.ForeignKey(Test, on_delete=models.PROTECT, null=False, blank=False, related_name='results', verbose_name='Тест')
     student = models.ForeignKey(User, on_delete=models.PROTECT, null=False, blank=False, related_name='results', verbose_name='Ученик')
-    answers = models.JSONField(null=False, blank=False, verbose_name='Ответы')
 
     class Meta:
         ordering = ['id']
@@ -80,3 +79,16 @@ class Result(models.Model):
 
     def __str__(self):
         return f'{self.points} - {self.date} - {self.test} - {self.student}'
+
+
+class ResultAnswer(models.Model):
+    answer = models.ForeignKey(Answer, on_delete=models.PROTECT, null=False, blank=False, related_name='result_answers', verbose_name='Ответ')
+    result = models.ForeignKey(Result, on_delete=models.PROTECT, null=False, blank=False, related_name='result_answers', verbose_name='Результат')
+
+    class Meta:
+        ordering = ['id']
+        verbose_name = 'Ответ результата'
+        verbose_name_plural = 'Ответы результата'
+
+    def __str__(self):
+        return f'{self.answer} - {self.result}'

@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
-from .models import Test, User
+from .models import User
 
 
 class LoginForm(AuthenticationForm):
@@ -19,9 +19,3 @@ class RegistrationForm(UserCreationForm):
     email = forms.CharField(widget=forms.TextInput(attrs={'class': 'content', 'placeholder': 'Почта *'}))
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'content', 'placeholder': 'Пароль *'}))
     password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'content', 'placeholder': 'Повторите пароль *'}))
-
-
-class ResultForm(forms.Form):
-
-    test = forms.ModelChoiceField(label='Тест', queryset=Test.objects.all())
-    answers = forms.JSONField()
