@@ -2,13 +2,40 @@
     display: flex;
     flex-direction: column;
     height: 100vh;
-    margin: 20px 20%;
+    margin: 20px;
     background: #fcfcfc;
 }
 
 .task_card {
-    height: 100px;
     margin: 5px 20px;
     padding: 10px;
-    background-color: #e8e8e6;
+    background-color: #f7f7f7;
+}
+
+.task_answer {
+    display: flex;
+    flex-direction: column;
+    margin: 0 10px;
+    padding: 5px;
+}
+
+.task_answer input {
+    transform: scale(1.5);
+}
+
+.task_answer label {
+    margin-left: 10px;
+    font-size: 24px;
+}
+
+.end {
+    text-decoration: none;
+    width: 20%;
+    margin: 20px 0 20px 20px;
+    padding: 15px 20px;
+    text-transform: uppercase;
+    text-align: center;
+    background: #000;
+    font-size: 14px;
+    color: #fff;
 }
