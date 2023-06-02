@@ -15,8 +15,8 @@
 
 
 {% block content %}
-<form method="post" class="main">
-  {% csrf_token %}
+<div class="main">
+  <div id="token">{% csrf_token %}</div>
   <div class="main_info">
     <h3>{{ test.title }}</h3>
     <h5>Тип теста: {{ test.type }}</h5>
@@ -30,23 +30,22 @@
         {% for answer in task.answers.all %}
         <div>
           <input type="checkbox" id="{{ task.id }}" value="{{ answer.id }}">
-          <label for="">{{ answer.text }}</label>
+          <label for="{{ answer.id }}">{{ answer.text }}</label>
         </div>
         {% endfor %}
       </div>
     </div>
     {% endfor %}
-    <a id="end" type="submit" class="end">Завершить тест</a>
-    <!-- <a id="end" href="{% url 'main:profile' %}" class="end">Завершить тест</a> -->
+    <button id="end" class="end">Завершить тест</button>
   </div>
-</form>
+</div>
 
 <script>
   let list_task = document.querySelectorAll('.task_card')
   let list_answer = document.querySelectorAll('input')
-  let a = document.querySelector('#end')
+  let button = document.querySelector('#end')
 
-  a.addEventListener("click", function(event) {
+  button.addEventListener("click", function(event) {
     let element = event.target
     let result = {}
     let next = true
@@ -79,8 +78,12 @@
       if (!answer) {
         event.preventDefault()
       } else {
-        a.setAttribute('value', result)
-        console.log(result)
+        const xhr = new XMLHttpRequest()
+        var token = document.getElementsByName('csrfmiddlewaretoken')[0].value
+
+        xhr.open('POST', "http://127.0.0.1:8000/result")
+        xhr.setRequestHeader('X-CSRFToken', token)
+        xhr.send(JSON.stringify(result))
       }
     }
   })
