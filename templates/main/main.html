@@ -11,7 +11,7 @@
 
 {% block main %}
 <main class="main">
-  <h1 class="main_info">Разделы тестов</h1>
+  <h1 class="main_info">Все тесты</h1>
   <div class="main_links">
     <a class="main_link">Все тесты</a>
     <a class="main_link">Лексика</a>
@@ -32,6 +32,7 @@
 </main>
 
 <script>
+  let main_info = document.querySelector('.main_info')
   let list_a = document.querySelectorAll('.main_link')
   let list_card = document.querySelectorAll('.main_card')
   list_a[0].style.fontWeight = 'bold'
@@ -44,6 +45,7 @@
         el.style.fontWeight = 'normal'
       }
       element.style.fontWeight = 'bold'
+      main_info.textContent = element.text
 
       for (let el of list_card) {
         el.style.display = "block" 
