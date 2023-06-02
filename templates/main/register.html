@@ -15,18 +15,16 @@
 
 
 {% block content %}
-<div class="container">
-  <form method="post" class="form">
-    {% csrf_token %}
-    <label>Ваш login</label>
-    {{ form.username}}
-    <label>Ваш email</label>
-    {{ form.email}}
-    <label>Пароль</label>
-    {{ form.password1}}
-    <label>Подтвердите пароль</label>
-    {{ form.password2}}
-    <button type="submit" href="{% url 'main:register' %}" class="register">Зарегистрироваться</button>
-  </form>
-</div>
+<form method="post" class="form">
+  {% csrf_token %}
+  <label class="label">Ваш login</label>
+  {{ form.username}}
+  <label class="label">Ваш email</label>
+  {{ form.email}}
+  <label class="label">Пароль</label>
+  {{ form.password1}}
+  <label class="label">Подтвердите пароль</label>
+  {{ form.password2}}
+  <button type="submit" href="{% url 'main:register' %}" class="register">Зарегистрироваться</button>
+</form>
 {% endblock %}

@@ -15,14 +15,12 @@
 
 
 {% block content %}
-<div class="container">
-  <form method="post" class="form">
-    {% csrf_token %}
-    <label>Ваш login</label>
-    {{ form.username}}
-    <label>Пароль</label>
-    {{ form.password}}
-    <button type="submit" href="{% url 'main:login' %}" class="login">Войти в аккаунт</button>
-  </form>
-</div>
+<form method="post" class="form">
+  {% csrf_token %}
+  <label class="label">Ваш login</label>
+  {{ form.username}}
+  <label  class="label">Пароль</label>
+  {{ form.password}}
+  <button type="submit" href="{% url 'main:login' %}" class="login">Войти в аккаунт</button>
+</form>
 {% endblock %}
