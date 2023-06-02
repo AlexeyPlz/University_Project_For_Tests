@@ -10,15 +10,23 @@
 
 
 {% block title %}
-  <title>Тесты</title>
+  <title>Тест № {{ test.id }}</title>
 {% endblock %}
 
 
-{% block main %}
-<div class="tests">
-  <h2>{{ test.author.username }}</h2>
-  {% for task in test.tasks.all %}
-    <h2>{{ task.text }}</р>
-  {% endfor %}
+{% block content %}
+<div class="main">
+  <div class="main_info">
+    <h3>{{ test.title }}</h3>
+    <h5>Тип теста: {{ test.type }}</h5>
+    <h6>Описание теста: {{ test.text }}</h6>
+  </div>
+  <div class="test_container">
+    {% for task in test.tasks.all %}
+    <div class="task_card">
+      <div>{{ task.text }}</div>
+    </div>
+    {% endfor %}
+  </div>
 </div>
 {% endblock %}

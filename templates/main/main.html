@@ -25,7 +25,7 @@
     <div class="main_card" value="{{ test.type }}">
       <p>{{ test.title }}</p>
       <h1>{{ test.text }}</h1>
-      <button id="{{ test.id }}" type="submit">Перейти к тесту</button>
+      <a href="test/{{ test.id }}">Перейти к тесту</a>
     </div>
     {% endfor %}
   </div>
@@ -35,6 +35,7 @@
   let main_info = document.querySelector('.main_info')
   let list_a = document.querySelectorAll('.main_link')
   let list_card = document.querySelectorAll('.main_card')
+  let list_button = document.querySelectorAll('.main_card a')
   list_a[0].style.fontWeight = 'bold'
 
   for (let a of list_a) {
@@ -57,6 +58,15 @@
             el.style.display = "none"
           }
         }
+      }
+    })
+  }
+
+  for (let button of list_button) {
+    button.addEventListener("click", function(event) {
+      let answer = confirm("Вы уверены, что хотите пройти тест?")
+      if (!answer) {
+        event.preventDefault()
       }
     })
   }
