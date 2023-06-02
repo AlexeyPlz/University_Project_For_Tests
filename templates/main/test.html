@@ -15,7 +15,8 @@
 
 
 {% block content %}
-<div class="main">
+<form method="post" class="main">
+  {% csrf_token %}
   <div class="main_info">
     <h3>{{ test.title }}</h3>
     <h5>Тип теста: {{ test.type }}</h5>
@@ -23,28 +24,65 @@
   </div>
   <div class="test_container">
     {% for task in test.tasks.all %}
-    <div class="task_card">
+    <div id="{{ task.id }}" class="task_card">
       <h2>{{ task.text }}</h2>
-      {% for answer in task.answers.all %}
-        <div>{{ answer.text }}</div>
-      {% endfor %}
       <div class="task_answer">
+        {% for answer in task.answers.all %}
         <div>
-          <input type="checkbox" id="" value="">
-          <label for="">{{ task.text }}</label>
+          <input type="checkbox" id="{{ task.id }}" value="{{ answer.id }}">
+          <label for="">{{ answer.text }}</label>
         </div>
-        <div>
-          <input type="checkbox" id="" value="">
-          <label for="">{{ task.text }}</label>
-        </div>
-        <div>
-          <input type="checkbox" id="" value="">
-          <label for="">{{ task.text }}</label>
-        </div>
+        {% endfor %}
       </div>
     </div>
     {% endfor %}
-    <a href="{% url 'main:profile' %}" class="end">Завершить тест</a>
+    <a id="end" type="submit" class="end">Завершить тест</a>
+    <!-- <a id="end" href="{% url 'main:profile' %}" class="end">Завершить тест</a> -->
   </div>
-</div>
+</form>
+
+<script>
+  let list_task = document.querySelectorAll('.task_card')
+  let list_answer = document.querySelectorAll('input')
+  let a = document.querySelector('#end')
+
+  a.addEventListener("click", function(event) {
+    let element = event.target
+    let result = {}
+    let next = true
+
+    for (let task of list_task) {
+      let answers = {}
+      let flag = false
+
+      for (let answer of list_answer) {
+        if (answer.id == task.id) {
+          answers[answer.value] = answer.checked
+          if (answer.checked) {
+            flag = true
+          }
+        }
+      }
+
+      result[task.id] = answers
+
+      if (!flag) {
+        event.preventDefault()
+        alert("Во всех заданиях должен быть указан хотя бы один ответ")
+        next = false
+        break
+      }
+    }
+
+    if (next) {
+      let answer = confirm("Вы уверены, что хотите завершить тест?")
+      if (!answer) {
+        event.preventDefault()
+      } else {
+        a.setAttribute('value', result)
+        console.log(result)
+      }
+    }
+  })
+</script>
 {% endblock %}
