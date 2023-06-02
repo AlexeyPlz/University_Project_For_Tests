@@ -24,15 +24,27 @@
   <div class="test_container">
     {% for task in test.tasks.all %}
     <div class="task_card">
-      <div>{{ task.text }}</div>
-      <div>{{ task.author.username }}</div>
+      <h2>{{ task.text }}</h2>
       {% for answer in task.answers.all %}
         <div>{{ answer.text }}</div>
       {% endfor %}
-      <input type="checkbox" id="js" name="course" value="js">
-      <label for="js"></label>
+      <div class="task_answer">
+        <div>
+          <input type="checkbox" id="" value="">
+          <label for="">{{ task.text }}</label>
+        </div>
+        <div>
+          <input type="checkbox" id="" value="">
+          <label for="">{{ task.text }}</label>
+        </div>
+        <div>
+          <input type="checkbox" id="" value="">
+          <label for="">{{ task.text }}</label>
+        </div>
+      </div>
     </div>
     {% endfor %}
+    <a href="{% url 'main:profile' %}" class="end">Завершить тест</a>
   </div>
 </div>
 {% endblock %}
