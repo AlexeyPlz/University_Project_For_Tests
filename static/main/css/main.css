@@ -90,6 +90,10 @@ button:hover {
     text-align: center;
 }
 
+.main_card #a2 {
+    opacity: 0.5;
+}
+
 .main_card p {
     font-size: 30px;
     font-weight: 500;
