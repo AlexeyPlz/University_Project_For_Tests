@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Answer, Task, Test
+from .models import Answer, Result, Task, Test
 
 
 class TaskAdmin(admin.ModelAdmin):
@@ -40,6 +40,20 @@ class TestAdmin(admin.ModelAdmin):
     empty_value_display = '-пусто-'
 
 
+class ResultAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'points',
+        'date',
+        'test',
+        'student'
+    )
+    search_fields = ('points', 'test', 'student')
+    list_filter = ('student',)
+    empty_value_display = '-пусто-'
+
+
 admin.site.register(Task, TaskAdmin)
 admin.site.register(Answer, AnswerAdmin)
 admin.site.register(Test, TestAdmin)
+admin.site.register(Result, ResultAdmin)

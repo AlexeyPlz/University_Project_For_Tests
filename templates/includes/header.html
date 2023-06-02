@@ -4,9 +4,9 @@
 <div class="header_links">
   <a href="{% url 'main:main' %}" class="header_link">Главная страница</a>
   {% if request.user.is_authenticated %}
-    {% comment %} <a href="{% url 'main:tests' %}" class="header_link">Тесты</a> {% endcomment %}
-    <a href="admin" class="header_link">Панель администратора</a>
-    {% comment %} <a href="{% url 'main:logout' %}" class="header_link">Выйти</a> {% endcomment %}
+    <a href="{% url 'main:profile' %}" class="header_link">Профиль</a>
+    <a href="admin" class="header_link">Админ панель</a>
+    <a href="{% url 'main:logout' %}" class="header_link">Выйти</a>
   {% else %}
     <a href="{% url 'main:login' %}" class="header_link">Вход в аккаунт</a>
     <a href="{% url 'main:register' %}" class="header_link">Регистрация</a>

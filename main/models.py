@@ -21,7 +21,7 @@ class Type(models.TextChoices):
 class Task(models.Model):
     text = models.CharField(max_length=100, null=False, blank=False, verbose_name='Текст')
     level = models.CharField(max_length=7, choices=Level.choices, default=Level.AVERAGE, verbose_name='Уровень')
-    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='tasks', verbose_name='Автор')
+    author = models.ForeignKey(User, on_delete=models.PROTECT, null=False, blank=False, related_name='tasks', verbose_name='Автор')
 
     class Meta:
         ordering = ['id']
@@ -39,7 +39,7 @@ class Answer(models.Model):
     text = models.CharField(max_length=100, null=False, blank=False, verbose_name='Текст')
     point = models.IntegerField(choices=POINTS, default=5, verbose_name='Очки')
     is_right = models.BooleanField(null=False, blank=False, default=False, verbose_name='Правильный ли ответ')
-    task = models.ForeignKey(Task, on_delete=models.CASCADE, null=False, blank=False, related_name='answers', verbose_name='Задание')
+    task = models.ForeignKey(Task, on_delete=models.PROTECT, null=False, blank=False, related_name='answers', verbose_name='Задание')
 
     class Meta:
         ordering = ['id']
@@ -54,7 +54,7 @@ class Test(models.Model):
     title = models.CharField(max_length=50, null=False, blank=False, verbose_name='Заглавие')
     text = models.CharField(max_length=300, null=False, blank=False, verbose_name='Описание')
     type = models.CharField(max_length=11, choices=Type.choices, default=Type.LEVEL, verbose_name='Тип')
-    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='tests', verbose_name='Автор')
+    author = models.ForeignKey(User, on_delete=models.PROTECT, null=False, blank=False, related_name='tests', verbose_name='Автор')
     tasks = models.ManyToManyField(Task, related_name='tests', verbose_name='Задания')
 
     class Meta:
@@ -67,4 +67,15 @@ class Test(models.Model):
 
 
 class Result(models.Model):
-    pass
+    points = models.IntegerField(null=False, blank=False, verbose_name='Набранные очки')
+    date = models.DateTimeField(null=False, blank=False, auto_now_add=True, verbose_name='Дата')
+    test = models.ForeignKey(Test, on_delete=models.PROTECT, null=False, blank=False, related_name='results', verbose_name='Тест')
+    student = models.ForeignKey(User, on_delete=models.PROTECT, null=False, blank=False, related_name='results', verbose_name='Ученик')
+
+    class Meta:
+        ordering = ['id']
+        verbose_name = 'Результат'
+        verbose_name_plural = 'Результаты'
+
+    def __str__(self):
+        return f'{self.points} - {self.date} - {self.test} - {self.student}'
