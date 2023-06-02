@@ -1,4 +1,4 @@
-{% extends 'main/base.html' %}
+{% extends 'base.html' %}
 
 {% block title %}
 Добро пожаловать!
@@ -10,15 +10,53 @@
 {% endblock %}
 
 {% block main %}
-<main>
-  <h1 class="main_info">Тест уровня</h1>
+<main class="main">
+  <h1 class="main_info">Разделы тестов</h1>
   <div class="main_links">
+    <a class="main_link">Все тесты</a>
     <a class="main_link">Лексика</a>
     <a class="main_link">Грамматика</a>
     <a class="main_link">Фразеология</a>
     <a class="main_link">Глаголы</a>
-    <a class="main_link">Тренажер спряжения</a>
     <a class="main_link">Тест уровня</a>
   </div>
+  <div class="main_container">
+    {% for test in object_list %}
+    <div class="main_card" value="{{ test.type }}">
+      <p>{{ test.title }}</p>
+      <h1>{{ test.text }}</h1>
+      <button id="{{ test.id }}" type="submit">Перейти к тесту</button>
+    </div>
+    {% endfor %}
+  </div>
 </main>
+
+<script>
+  let list_a = document.querySelectorAll('.main_link')
+  let list_card = document.querySelectorAll('.main_card')
+  list_a[0].style.fontWeight = 'bold'
+
+  for (let a of list_a) {
+    a.addEventListener("click", function(event) {
+      let element = event.target
+
+      for (let el of list_a) {
+        el.style.fontWeight = 'normal'
+      }
+      element.style.fontWeight = 'bold'
+
+      for (let el of list_card) {
+        el.style.display = "block" 
+      }
+
+      if (element.text != 'Все тесты') {
+        for (let el of list_card) {
+          if (element.text != el.getAttribute('value')) {
+            el.style.display = "none"
+          }
+        }
+      }
+    })
+  }
+</script>
 {% endblock %}
