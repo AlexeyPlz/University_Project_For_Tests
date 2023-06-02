@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
-from .models import Test, User
+from .models import User
 
 
 class LoginForm(AuthenticationForm):
