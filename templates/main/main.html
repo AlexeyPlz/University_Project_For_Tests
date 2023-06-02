@@ -25,10 +25,6 @@
     <div class="main_card" value="{{ test.type }}">
       <p>{{ test.title }}</p>
       <h1>{{ test.text }}</h1>
-      <h1>{{ test.author.username }}</h1>
-      {% for task in test.tasks.all %}
-        <p>{{ task.text }}</p>
-      {% endfor %}
       <button id="{{ test.id }}" type="submit">Перейти к тесту</button>
     </div>
     {% endfor %}
@@ -55,7 +51,7 @@
         el.style.display = "block" 
       }
 
-      if (element.text != 'Все тесты') {
+      if (element != list_a[0]) {
         for (let el of list_card) {
           if (element.text != el.getAttribute('value')) {
             el.style.display = "none"

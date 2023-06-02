@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+
+{% load static %}
+
+
+{% block style %}
+  <link rel="stylesheet" href="{% static 'main/css/profile.css' %}">
+{% endblock %}
+
+
+{% block title %}
+  <title>Мои тесты</title>
+{% endblock %}
+
+
+{% block content %}
+<div class="main_container">
+  {% for result in object_list %}
+  <div class="test_card" value="{{ result.id }}">
+    <h1>{{ result.test.title }}</h1>
+    <div class="test_info">
+      <div class="test_field">
+        <h2>Автор теста:</h2>
+        <p>{{ result.test.author.username }}</p>
+      </div>
+      <div class="test_field">
+        <h2>Выполнил студент:</h2>
+        <p>{{ result.student.username }}</p>
+      </div>
+    </div>
+    <div class="test_info">
+      <div class="test_field">
+        <h2>Тип теста:</h2>
+        <p class="test_type">{{ result.test.type }}</p>
+      </div>
+      <div class="test_field">
+        <h2>Кол-во очков:</h2>
+        <p class="test_number">{{ result.points }}</p>
+      </div>
+      <div class="test_field">
+        <h2>Дата выполнения теста:</h2>
+        <p>{{ result.student.username }}</p>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<script>
+    let number = document.querySelector('.test_number')
+    let value = number.textContent;
+    if (value == "0" || value == "1" || value == "2") {
+      number.style.backgroundColor = '#fa0515'
+    }
+    if (value == "3" || value == "4" || value == "5") {
+      number.style.backgroundColor = '#fac02d'
+    }
+    if (value == "6" || value == "7" || value == "8") {
+      number.style.backgroundColor = '#fdff99'
+    }
+    if (value == "9" || value == "10") {
+      number.style.backgroundColor = '#94f567'
+    }
+</script>
+{% endblock %}
