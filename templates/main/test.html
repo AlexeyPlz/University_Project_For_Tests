@@ -26,7 +26,7 @@
     <div class="task_card">
       <h2>{{ task.text }}</h2>
       {% for answer in task.answers.all %}
-        <div></div>
+        <div>{{ answer.text }}</div>
       {% endfor %}
       <div class="task_answer">
         <div>
