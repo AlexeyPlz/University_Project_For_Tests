@@ -25,6 +25,10 @@
     <div class="main_card" value="{{ test.type }}">
       <p>{{ test.title }}</p>
       <h1>{{ test.text }}</h1>
+      <h1>{{ test.author.username }}</h1>
+      {% for task in test.tasks.all %}
+        <p>{{ task.text }}</p>
+      {% endfor %}
       <button id="{{ test.id }}" type="submit">Перейти к тесту</button>
     </div>
     {% endfor %}
