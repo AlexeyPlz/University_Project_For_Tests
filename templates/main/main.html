@@ -1,17 +1,17 @@
 {% extends 'base.html' %}
 
+
+{% load static %}
+
+
 {% block title %}
-Добро пожаловать!
+  <title>Добро пожаловать!</title>
 {% endblock %}
 
-{% block header_link %}
-<a href="login" class="header_link">Вход в аккаунт</a>
-<a href="register" class="header_link">Регистрация</a>
-{% endblock %}
 
-{% block main %}
-<main class="main">
-  <h1 class="main_info">Все тесты</h1>
+{% block content %}
+<div class="main">
+  <h1 class="main_info">Разделы тестов</h1>
   <div class="main_links">
     <a class="main_link">Все тесты</a>
     <a class="main_link">Лексика</a>
@@ -29,7 +29,7 @@
     </div>
     {% endfor %}
   </div>
-</main>
+</div>
 
 <script>
   let main_info = document.querySelector('.main_info')

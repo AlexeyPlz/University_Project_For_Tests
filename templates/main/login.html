@@ -1,26 +1,28 @@
 {% extends 'base.html' %}
 
-{% block css %}
-<link rel="stylesheet" href="{% static 'main/css/login.css' %}">
+
+{% load static %}
+
+
+{% block style %}
+  <link rel="stylesheet" href="{% static 'main/css/login.css' %}">
 {% endblock %}
+
 
 {% block title %}
-<title>Вход</title>
+  <title>Вход</title>
 {% endblock %}
 
-{% block header_link %}
-<a href="register" class="header_link">Регистрация</a>
-{% endblock %}
 
-{% block main %}
-<main class="container">
+{% block content %}
+<div class="container">
   <form method="post" class="form">
     {% csrf_token %}
     <label>Ваш login</label>
     {{ form.username}}
     <label>Пароль</label>
-    {{ form.password1}}
-    <button type="submit" href="main" class="login">Войти в аккаунт</button>
+    {{ form.password}}
+    <button type="submit" href="{% url 'main:login' %}" class="login">Войти в аккаунт</button>
   </form>
-</main>
+</div>
 {% endblock %}

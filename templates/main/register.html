@@ -1,19 +1,21 @@
 {% extends 'base.html' %}
 
-{% block css %}
-<link rel="stylesheet" href="{% static 'main/css/register.css' %}">
+
+{% load static %}
+
+
+{% block style %}
+  <link rel="stylesheet" href="{% static 'main/css/register.css' %}">
 {% endblock %}
+
 
 {% block title %}
-Регистрация
+  <title>Регистрация</title>
 {% endblock %}
 
-{% block header_link %}
-<a href="login" class="header_link">Вход в аккаунт</a>
-{% endblock %}
 
-{% block main %}
-<main class="container">
+{% block content %}
+<div class="container">
   <form method="post" class="form">
     {% csrf_token %}
     <label>Ваш login</label>
@@ -24,7 +26,7 @@
     {{ form.password1}}
     <label>Подтвердите пароль</label>
     {{ form.password2}}
-    <button type="submit" href="main" class="register">Зарегистрироваться</button>
+    <button type="submit" href="{% url 'main:register' %}" class="register">Зарегистрироваться</button>
   </form>
-</main>
+</div>
 {% endblock %}
