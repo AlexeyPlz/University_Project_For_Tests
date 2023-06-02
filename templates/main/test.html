@@ -25,8 +25,9 @@
     {% for task in test.tasks.all %}
     <div class="task_card">
       <div>{{ task.text }}</div>
+      <div>{{ task.author.username }}</div>
       {% for answer in task.answers.all %}
-        <div></div>
+        <div>{{ answer.text }}</div>
       {% endfor %}
       <input type="checkbox" id="js" name="course" value="js">
       <label for="js"></label>

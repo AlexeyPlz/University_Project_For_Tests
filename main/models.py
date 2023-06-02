@@ -3,6 +3,8 @@ from django.db import models
 
 User = get_user_model()
 
+POINTS = [(i, i) for i in range(11)]
+
 
 class Level(models.TextChoices):
     EASY = 'Легкий'
@@ -33,8 +35,6 @@ class Task(models.Model):
 
 
 class Answer(models.Model):
-
-    POINTS = [(i, i) for i in range(11)]
 
     text = models.CharField(max_length=100, null=False, blank=False, verbose_name='Текст')
     point = models.IntegerField(choices=POINTS, default=5, verbose_name='Очки')
@@ -71,6 +71,7 @@ class Result(models.Model):
     date = models.DateTimeField(null=False, blank=False, auto_now_add=True, verbose_name='Дата')
     test = models.ForeignKey(Test, on_delete=models.PROTECT, null=False, blank=False, related_name='results', verbose_name='Тест')
     student = models.ForeignKey(User, on_delete=models.PROTECT, null=False, blank=False, related_name='results', verbose_name='Ученик')
+    answers = models.JSONField(null=False, blank=False, verbose_name='Ответы')
 
     class Meta:
         ordering = ['id']
