@@ -2,11 +2,8 @@ import os
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 SECRET_KEY = 'django-insecure-&=!pdtylur#20a3tu7nh#b%ex*xzrpax1&$vzfprx!+voo+)'
-
 DEBUG = True
-
 ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
@@ -59,8 +56,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'db',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'localhost',
+        'PORT': '5432'
     }
 }
 
@@ -80,13 +81,8 @@ DATABASES = {
 # ]
 
 LANGUAGE_CODE = 'ru-ru'
-
 TIME_ZONE = 'Europe/Samara'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
