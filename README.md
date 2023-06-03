@@ -1,5 +1,5 @@
 При первом запуске:
-1. Переходим в папку GrammaRu
+1. Открываем первый терминал и переходим в папку GrammaRu
 
 2. Создаем виртуальное окружение и устанавливаем необходимые библиотеки:
 python3 -m venv venv
@@ -10,7 +10,7 @@ pip install psycopg2-binary
 3. Создаем и запускаем БД:
 docker-compose up
 
-4. Открываем еще один терминал, выполняем пункт 1 и делаем миграции:
+4. Выполняем пункт 1 для второго терминала и делаем миграции:
 python manage.py makemigrations
 python manage.py migrate
 python manage.py createsuperuser
@@ -20,8 +20,18 @@ python manage.py runserver
 
 
 При повторных запусках:
-1. Переходим в папку GrammaRu и открываем первый терминал. Запускаем БД:
-docker-compose run
+1. Открываем первый терминал и переходим в папку GrammaRu. Запускаем БД:
+docker-compose up
 
-2. Переходим в папку GrammaRu и открываем второй терминал. Запускаем приложение:
+2. Открываем второй терминал и переходим в папку GrammaRu. Запускаем приложение:
 python manage.py runserver
+
+
+При косяках с БД или новых добавлениях и правках в моделях:
+1. Удаляем из папки migrations все файлы с миграциями
+
+2. Открываем терминал и чистим docker:
+docker container rm -f $(docker container ls -aq)
+docker image prune -a
+docker volume prune
+docker network prune
