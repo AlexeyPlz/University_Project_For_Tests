@@ -25,9 +25,6 @@
     <div class="main_card" value="{{ test.type }}">
       <p>{{ test.title }}</p>
       <h1>{{ test.text }}</h1>
-      {% for task in test.tasks.all %}
-        <div>{{ task.text }}</div>
-      {% endfor %}
       {% if request.user.is_authenticated %}
       <a id="a1" href="test/{{ test.id }}">Перейти к тесту</a>
       {% else %}

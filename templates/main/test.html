@@ -22,7 +22,7 @@
     <h5>Тип теста: {{ test.type }}</h5>
     <h6>Описание теста: {{ test.text }}</h6>
   </div>
-  <div class="test_container">
+  <div id="test_id" value="{{ test.id }}" class="test_container">
     {% for task in test.tasks.all %}
     <div id="{{ task.id }}" class="task_card">
       <h2>{{ task.text }}</h2>
@@ -44,14 +44,13 @@
   let list_task = document.querySelectorAll('.task_card')
   let list_answer = document.querySelectorAll('input')
   let button = document.querySelector('#end')
+  let answers = {'test_id': document.querySelector('#test_id').getAttribute('value')}
 
   button.addEventListener("click", function(event) {
     let element = event.target
-    let result = {}
     let next = true
 
     for (let task of list_task) {
-      let answers = {}
       let flag = false
 
       for (let answer of list_answer) {
@@ -63,10 +62,7 @@
         }
       }
 
-      result[task.id] = answers
-
       if (!flag) {
-        event.preventDefault()
         alert("Во всех заданиях должен быть указан хотя бы один ответ")
         next = false
         break
@@ -75,15 +71,14 @@
 
     if (next) {
       let answer = confirm("Вы уверены, что хотите завершить тест?")
-      if (!answer) {
-        event.preventDefault()
-      } else {
+      if (answer) {
         const xhr = new XMLHttpRequest()
         var token = document.getElementsByName('csrfmiddlewaretoken')[0].value
 
         xhr.open('POST', "http://127.0.0.1:8000/result")
         xhr.setRequestHeader('X-CSRFToken', token)
-        xhr.send(JSON.stringify(result))
+        xhr.send(JSON.stringify(answers))
+        window.location.href = "http://127.0.0.1:8000"
       }
     }
   })

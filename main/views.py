@@ -1,4 +1,6 @@
+import json
 from datetime import datetime
+
 from django.contrib.auth import logout, login
 from django.contrib.auth.views import LoginView
 from django.shortcuts import redirect
@@ -6,7 +8,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, ListView
 
 from .forms import LoginForm, RegistrationForm
-from .models import Answer, Result, Test
+from .models import Answer, Result, ResultAnswer, Test
 
 
 class Login(LoginView):
@@ -34,7 +36,7 @@ class Main(ListView):
     context_object_name = 'tests'
 
 
-class Test(DetailView):
+class TestInfo(DetailView):
     model = Test
     template_name = 'main/test.html'
 
@@ -55,13 +57,16 @@ def logout_user(request):
 
 def result(request):
     if request.method == 'POST':
-        print(request.body)
-        #     result.points = 0
-        #     for answer in result.answers:
-        #         answer = Answer.objects.get(id=answer.get('answer_id'))
-        #         if answer.is_right:
-        #             result.points += answer.point
-        #     result.date = datetime.now()
-        #     result.student = request.user
-        #     result.save()
+        data = json.loads(request.body)
+        test = Test.objects.get(id=data['test_id'])
+        del data['test_id']
+        points = 0
+        for answer_id in data.keys():
+            answer = Answer.objects.get(id=answer_id)
+            if answer.is_right:
+                points += answer.point
+        result = Result.objects.create(points=points, date = datetime.now(), test = test, student = request.user)
+        for answer_id in data.keys():
+            answer = Answer.objects.get(id=answer_id)
+            ResultAnswer.objects.create(answer = answer, result = result)
     return redirect('main:main')
