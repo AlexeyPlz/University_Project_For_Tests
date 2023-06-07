@@ -1,13 +1,18 @@
+.test_container {
+    height: 100vh;
+    margin: 20px 10%;
+    background: #fcfcfc;
+}
+  
 .test_card {
     position: relative;
-    grid-row: span 1;
-    grid-column: span 1;
-    max-width: 100%;
+    width: 95%;
     max-height: 100px;
     background: #f2f2f2;
     border-radius: 30px;
     border: 2px solid #9c9c9c;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    margin: 10px;
     padding: 20px 20px 30px 20px;
     text-align: center;
 }
@@ -25,6 +30,7 @@
 
 .test_field {
     display: flex;
+    max-height: 50px;
 }
 
 .test_info h2 {
