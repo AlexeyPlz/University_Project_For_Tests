@@ -3,7 +3,7 @@
 
 <div class="header_links">
   <a href="{% url 'main:main' %}" class="header_link">Главная страница</a>
-  <a href="http://127.0.0.1:8000/admin" class="header_link">Админ панель</a>
+  <a href="{% url 'admin:index' %}" class="header_link">Админ панель</a>
   {% if request.user.is_authenticated %}
     <a href="{% url 'main:profile' %}" class="header_link">Профиль</a>
     <a href="{% url 'main:logout' %}" class="header_link">Выйти</a>
