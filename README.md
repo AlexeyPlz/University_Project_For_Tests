@@ -30,5 +30,5 @@ python3 manage.py createsuperuser
 ```
 Запускаем проект:
 ```bash
-python3 manage.py runserver
+python3 manage.py runserver --insecure
 ```

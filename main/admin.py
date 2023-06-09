@@ -3,6 +3,7 @@ from django.contrib import admin
 from .models import Answer, Result, ResultAnswer, Task, Test
 
 
+@admin.register(Task)
 class TaskAdmin(admin.ModelAdmin):
     list_display = (
         'id',
@@ -15,6 +16,7 @@ class TaskAdmin(admin.ModelAdmin):
     empty_value_display = '-пусто-'
 
 
+@admin.register(Answer)
 class AnswerAdmin(admin.ModelAdmin):
     list_display = (
         'id',
@@ -28,6 +30,7 @@ class AnswerAdmin(admin.ModelAdmin):
     empty_value_display = '-пусто-'
 
 
+@admin.register(Test)
 class TestAdmin(admin.ModelAdmin):
     list_display = (
         'id',
@@ -40,6 +43,7 @@ class TestAdmin(admin.ModelAdmin):
     empty_value_display = '-пусто-'
 
 
+@admin.register(Result)
 class ResultAdmin(admin.ModelAdmin):
     list_display = (
         'id',
@@ -53,6 +57,7 @@ class ResultAdmin(admin.ModelAdmin):
     empty_value_display = '-пусто-'
 
 
+@admin.register(ResultAnswer)
 class ResultAnswerAdmin(admin.ModelAdmin):
     list_display = (
         'id',
@@ -60,10 +65,3 @@ class ResultAnswerAdmin(admin.ModelAdmin):
         'result'
     )
     empty_value_display = '-пусто-'
-
-
-admin.site.register(Task, TaskAdmin)
-admin.site.register(Answer, AnswerAdmin)
-admin.site.register(Test, TestAdmin)
-admin.site.register(Result, ResultAdmin)
-admin.site.register(ResultAnswer, ResultAnswerAdmin)
